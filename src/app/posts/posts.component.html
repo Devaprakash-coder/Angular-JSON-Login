@@ -1,0 +1,14 @@
+<div class="input-div">
+    <input class="form-control" type="text" name="new" id="new" placeholder="Newpost" [(ngModel)]="edited">
+    <button class="btn btn-primary" (click)="postdata()">post</button>
+</div>
+<div class="main-div">
+    <div class="card" *ngFor="let option of options">
+        <h1>{{option.title | uppercase }}</h1>
+        <h2>{{option.author}}</h2>
+        <div class="button-div" *ngIf="uname == option.author">
+            <button class="btn btn-success" (click)="editdata(option)">Edit</button>
+            <button class="btn btn-danger" (click)="deletedata(option.id)">Delete</button>
+        </div>
+    </div>
+</div>

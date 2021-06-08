@@ -1,0 +1,51 @@
+{
+  "posts": [
+    {
+      "title": "deva",
+      "author": "deva",
+      "id": 1
+    },
+    {
+      "title": "mohan",
+      "author": "mohan",
+      "id": 5
+    },
+    {
+      "title": "aparna",
+      "author": "aparna",
+      "id": 7
+    },
+    {
+      "title": "sujatha",
+      "author": "sujatha",
+      "id": 8
+    },
+    {
+      "title": "kash",
+      "author": "deva",
+      "id": 9
+    }
+  ],
+  "users": [
+    {
+      "uname": "deva",
+      "pword": "kash",
+      "id": 1
+    },
+    {
+      "uname": "pravin",
+      "pword": "raj",
+      "id": 2
+    },
+    {
+      "uname": "aparna",
+      "pword": "bavani",
+      "id": 3
+    },
+    {
+      "uname": "kash",
+      "pword": "deva",
+      "id": 4
+    }
+  ]
+}
