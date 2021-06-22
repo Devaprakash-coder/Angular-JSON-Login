@@ -17,8 +17,7 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.uname = localStorage.getItem("uname");
-    this.apiService.getdata().subscribe((res) => {
-      console.log('resssss',res);   
+    this.apiService.getdata().subscribe((res) => {   
       this.options = res;
     });
   }

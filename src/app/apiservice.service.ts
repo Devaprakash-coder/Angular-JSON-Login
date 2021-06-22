@@ -14,11 +14,11 @@ export class ApiserviceService {
 
   postLink: boolean = false;
   signupLink: boolean = false;
-
+url = "https://mongo-login-app.herokuapp.com/"
   getdata(): Observable<any> {
     return this
       .http
-      .get(`http://localhost:3000/posts`)
+      .get(`${this.url}posts`)
       .pipe(
         map(res => res)
       )
@@ -27,32 +27,32 @@ export class ApiserviceService {
   postdata(data: post) {
     return this
       .http
-      .post(`http://localhost:3000/posts`,data)
+      .post(`${this.url}posts`,data)
   }
 
   editdata(id: any, data: post) {
-    console.log('service idd',id);
     var id = id;
     return this
       .http
-      .put(`http://localhost:3000/posts/update/${id}`, data)
+      .put(`${this.url}posts/update/${id}`, data)
   }
   deletedata(id: any) {
     var id = id;
     return this
       .http
-      .delete(`http://localhost:3000/posts/delete/${id}`)
+      .delete(`${this.url}posts/delete/${id}`)
   } 
   signUp(user: any) {
     return this
       .http
-      .post("http://localhost:3000/user",user)
+      .post("${this.url}user",user)
   }
 
-  getuser(uname: any): Observable<any> {
+  getuser(unames: any): Observable<any> {
+    var uname = unames;    
     return this
       .http
-      .get(`http://localhost:3000/users`,uname)
+      .put(`${this.url}users`,unames)
       .pipe(
         map(res => res)
       )
@@ -61,6 +61,6 @@ export class ApiserviceService {
   myPost(author: any): Observable<any> {
     return this
       .http
-      .get(`http://localhost:3000/posts?author=${author}`)
+      .get(`${this.url}posts?author=${author}`)
   }
 }

@@ -15,17 +15,12 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit(): void { }
 
-  signup(uname: string, pword: any) {
+  signup(uname: any, pword: any) {
     if (uname == "" || pword == "") {
       alert("Enter username and password")
     } else {
-      this.apiservice.getuser(uname).subscribe((username) => {
-        username.forEach((element: any) => {
-          if (element.uname === uname) {
-            this.newUser = element;
-          }
-        });
-        if (this.newUser == null) {
+      this.apiservice.getuser({uname: uname}).subscribe((username) => {   
+        if (username == null) {
           this.users = { "uname": uname, 'pword': pword };
           this.apiservice.signUp(this.users).subscribe();
           this.route.navigate(['/logIn'])
@@ -33,7 +28,6 @@ export class RegisterComponent implements OnInit {
         }
         else {
           alert("Username Already Exist")
-          this.newUser = null;
         }
       });
     }
