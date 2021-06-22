@@ -17,14 +17,14 @@ export class PostsComponent implements OnInit {
 
   ngOnInit() {
     this.uname = localStorage.getItem("uname");
-    this.apiService.getdata().subscribe((res) => {
+    this.apiService.getdata().subscribe((res) => {   
       this.options = res;
     });
   }
 
   postdata() {
-    if (this.activeData.id) {
-      this.apiService.editdata(this.activeData.id, { title: this.edited, author: this.activeData.author }).subscribe(data => {
+    if (this.activeData._id) {
+      this.apiService.editdata(this.activeData._id, { title: this.edited, author: this.activeData.author }).subscribe(data => {
         this.edited = "";
         this.activeData = {};
         this.ngOnInit();
@@ -42,7 +42,7 @@ export class PostsComponent implements OnInit {
     this.edited = data.title;
   }
 
-  deletedata(id: number) {
+  deletedata(id: any) {
     this.apiService.deletedata(id).subscribe(() => {
       this.ngOnInit();
     })

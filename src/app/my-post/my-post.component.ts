@@ -16,23 +16,27 @@ export class MyPostComponent implements OnInit {
   ngOnInit(): void {
 
     this.uname = localStorage.getItem("uname")
-    console.log("stored uname", this.uname);
     this.apiService.myPost(this.uname).subscribe((data => {
-      this.myPosts = data;
+      data.forEach((element: any) => {
+        console.log('elementt', element.author);
+        if (element.author === this.uname) {
+          this.myPosts.push(element);
+        }
+      });
 
     }))
   }
 
   update() {
-    if(this.title == ''){
+    if (this.title == '') {
       alert("Enter value")
-    }else{
-      this.apiService.editdata(this.editing.id, { title: this.title, author: this.editing.author }).subscribe(data => {
-      this.title = "";
-      this.editing = {};
-      this.ngOnInit();
-    })
-  }
+    } else {
+      this.apiService.editdata(this.editing._id, { title: this.title, author: this.editing.author }).subscribe(data => {
+        this.title = "";
+        this.editing = {};
+        this.ngOnInit();
+      })
+    }
   }
 
   editdata(post: any) {
@@ -45,5 +49,4 @@ export class MyPostComponent implements OnInit {
       this.ngOnInit();
     })
   }
-
 }

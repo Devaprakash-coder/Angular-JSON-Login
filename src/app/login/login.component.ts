@@ -12,32 +12,25 @@ export class LoginComponent implements OnInit {
   loginDetails: any = {}
   constructor(private apiService: ApiserviceService, private route: Router) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   logIn(luname: string, lpword: any) {
     if (luname == "" && lpword == "" || luname == null && lpword == null) {
       alert("Enter username and password")
     } else {
       this.loginDetails = { luname: luname, lpword: lpword };
-      this.apiService.getuser(luname).subscribe((user) => {
-        if (user.length == 0) {
+      this.apiService.getuser({ uname: luname }).subscribe((user) => {
+        if (!user) {
           alert("Wrong Username")
+        } else if (user.pword !== lpword) {
+          alert("Wrong Password")
         } else {
-          for (let index = 0; index < user.length; index++) {
-            const element = user[index];
-            if (element.pword !== lpword) {
-              alert("Wrong Password")
-            }
-            else {
-              localStorage.setItem("uname", element.uname)
-              this.apiService.postLink = true;
-              this.apiService.signupLink = true;
-              this.route.navigate(['/posts']);
-            }
-          }
+          localStorage.setItem("uname", user.uname)
+          this.apiService.postLink = true;
+          this.apiService.signupLink = true;
+          this.route.navigate(['/posts']);
         }
       });
     }
   }
-
 }
