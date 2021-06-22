@@ -10,27 +10,32 @@ import { Router } from '@angular/router'
 export class RegisterComponent implements OnInit {
   users = {};
   show: boolean = true;
+  newUser: any;
   constructor(private apiservice: ApiserviceService, private route: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  signUp(uname: string, pword: any) {
-    
+  signup(uname: string, pword: any) {
     if (uname == "" || pword == "") {
       alert("Enter username and password")
     } else {
       this.apiservice.getuser(uname).subscribe((username) => {
-        if (username.length == 0) {
+        username.forEach((element: any) => {
+          if (element.uname === uname) {
+            this.newUser = element;
+          }
+        });
+        if (this.newUser == null) {
           this.users = { "uname": uname, 'pword': pword };
-          this.apiservice.signUp(this.users).subscribe((user) => {
-            this.route.navigate(['/logIn'])
-          })
+          this.apiservice.signUp(this.users).subscribe();
+          this.route.navigate(['/logIn'])
+          alert("Registered Successfully");
         }
         else {
           alert("Username Already Exist")
+          this.newUser = null;
         }
-      })
+      });
     }
   }
 }

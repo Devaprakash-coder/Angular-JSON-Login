@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { post } from './posts'
+import { identifierModuleUrl } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -26,30 +27,32 @@ export class ApiserviceService {
   postdata(data: post) {
     return this
       .http
-      .post(`http://localhost:3000/posts`, data)
+      .post(`http://localhost:3000/posts`,data)
   }
 
-  editdata(id: number, data: post) {
+  editdata(id: any, data: post) {
+    console.log('service idd',id);
+    var id = id;
     return this
       .http
-      .put(`http://localhost:3000/posts/${id}`, data)
+      .put(`http://localhost:3000/posts/update/${id}`, data)
   }
-  deletedata(id: number) {
+  deletedata(id: any) {
+    var id = id;
     return this
       .http
-      .delete(`http://localhost:3000/posts/${id}`)
-  }
-
+      .delete(`http://localhost:3000/posts/delete/${id}`)
+  } 
   signUp(user: any) {
     return this
       .http
-      .post(`http://localhost:3000/users`, user)
+      .post("http://localhost:3000/user",user)
   }
 
-  getuser(uname: string): Observable<any> {
+  getuser(uname: any): Observable<any> {
     return this
       .http
-      .get(`http://localhost:3000/users?uname=${uname}`)
+      .get(`http://localhost:3000/users`,uname)
       .pipe(
         map(res => res)
       )
